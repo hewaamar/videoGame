@@ -89,5 +89,8 @@
   <ItemGroup>
     <None Include="Resources\platform1.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\movingCoin.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
