@@ -48,7 +48,6 @@ namespace videoGame
             this.platform = new System.Windows.Forms.PictureBox();
             this.background = new System.Windows.Forms.PictureBox();
             this.exitButton = new System.Windows.Forms.Button();
-            this.playAgainButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.winLoseBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.door)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -87,10 +86,9 @@ namespace videoGame
             // 
             this.winLoseBox.Location = new System.Drawing.Point(-3, -1);
             this.winLoseBox.Name = "winLoseBox";
-            this.winLoseBox.Size = new System.Drawing.Size(473, 513);
+            this.winLoseBox.Size = new System.Drawing.Size(339, 346);
             this.winLoseBox.TabIndex = 17;
             this.winLoseBox.TabStop = false;
-            this.winLoseBox.Visible = false;
             // 
             // door
             // 
@@ -176,7 +174,7 @@ namespace videoGame
             this.character.BackColor = System.Drawing.Color.Transparent;
             this.character.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("character.BackgroundImage")));
             this.character.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.character.Location = new System.Drawing.Point(165, 106);
+            this.character.Location = new System.Drawing.Point(140, 108);
             this.character.Name = "character";
             this.character.Size = new System.Drawing.Size(54, 53);
             this.character.TabIndex = 5;
@@ -215,7 +213,7 @@ namespace videoGame
             // platform
             // 
             this.platform.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("platform.BackgroundImage")));
-            this.platform.Location = new System.Drawing.Point(143, 222);
+            this.platform.Location = new System.Drawing.Point(118, 222);
             this.platform.Name = "platform";
             this.platform.Size = new System.Drawing.Size(100, 50);
             this.platform.TabIndex = 1;
@@ -237,36 +235,21 @@ namespace videoGame
             this.exitButton.BackColor = System.Drawing.Color.LightCoral;
             this.exitButton.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.exitButton.Location = new System.Drawing.Point(60, 383);
+            this.exitButton.Location = new System.Drawing.Point(83, 207);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(120, 50);
+            this.exitButton.Size = new System.Drawing.Size(151, 65);
             this.exitButton.TabIndex = 18;
             this.exitButton.Text = "Exit Game";
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Visible = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
-            // playAgainButton
-            // 
-            this.playAgainButton.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.playAgainButton.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playAgainButton.ForeColor = System.Drawing.Color.PowderBlue;
-            this.playAgainButton.Location = new System.Drawing.Point(254, 383);
-            this.playAgainButton.Name = "playAgainButton";
-            this.playAgainButton.Size = new System.Drawing.Size(151, 50);
-            this.playAgainButton.TabIndex = 19;
-            this.playAgainButton.Text = "Play Again";
-            this.playAgainButton.UseVisualStyleBackColor = false;
-            this.playAgainButton.Visible = false;
-            this.playAgainButton.Click += new System.EventHandler(this.playAgainButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1379, 504);
-            this.Controls.Add(this.playAgainButton);
+            this.ClientSize = new System.Drawing.Size(337, 343);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.winLoseBox);
             this.Controls.Add(this.door);
@@ -326,7 +309,6 @@ namespace videoGame
         private System.Windows.Forms.PictureBox door;
         private System.Windows.Forms.PictureBox winLoseBox;
         private System.Windows.Forms.Button exitButton;
-        private System.Windows.Forms.Button playAgainButton;
     }
 }
 
