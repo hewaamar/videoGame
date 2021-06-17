@@ -7,46 +7,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
 
 namespace videoGame
 {
     public partial class Form1 : Form
     {
-
+        // SET UP OBSTACLES
         List<Rectangle> obstacle = new List<Rectangle>();
-        int obstacleHeight = 50;
-        int obstacleWidth = 15;
-        int obstacleX = 50;
+        List<PictureBox> leftPic = new List<PictureBox>();
+        int obstacleHeight = 20;
+        int obstacleWidth = 10;
+        int obstacle1X = 200;
+        int obstacle2X = 500;
+        int obstacle3X = 740;
         int obstacleSpeed = 5;
-        SolidBrush obstacleBrush = new SolidBrush(Color.HotPink);
         int obstacleCounter = 0;
+        SolidBrush obstacleBrush = new SolidBrush(Color.HotPink);
 
-        // set up movement directions
+        // set up character movements
         bool goLeft = false;
         bool goRight = false;
         bool jumping = false;
 
-        // set up speeds/forces
+        // set up speeds/forces for character + game layout
         int characterSpeed = 0;
         int jumpSpeed = 12;
         int force = 8;
         int backgroundSpeed = 5;
-
-
         int playerSpeed = 10;
 
-  
+        // score
         int playerScore = 0;
         int coinValue = 5;
 
-        List<Rectangle> leftRectangle = new List<Rectangle>();
+        // set up graphics
+        Graphics bgGraphics;
+
+        // Set up soundplayer
+         SoundPlayer musicPlayer;
+        SoundPlayer coinPlayer;
 
         public Form1()
         {
-            InitializeComponent();   
+            InitializeComponent();
+            // set up graphics
+            bgGraphics = background.CreateGraphics();
+
+            //musicPlayer = new SoundPlayer(Properties.Resources.mainSong);
+
+            // make door visible
+            door.Visible = true;
+
+           
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e) // key down event
         {
 
             if (e.KeyCode == Keys.Left)
@@ -63,7 +80,7 @@ namespace videoGame
             }
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e) // key yp event
         {
             if (e.KeyCode == Keys.Left)
             {
@@ -79,38 +96,63 @@ namespace videoGame
             }
         }
 
+
+        public void GameStart()
+        {
+            gameTimer.Enabled = true; // enable game timer
+            winLoseBox.Visible = false;
+            background.Image = null;
+            background.BackgroundImage = null;
+            character.Parent = background;
+        }
+
+        public void GameWin() // screen layout for win game
+        {
+            gameTimer.Enabled = false;
+            winLoseBox.Visible = true;
+            winLoseBox.BackgroundImage = Properties.Resources.winner;
+            winLoseBox.BackgroundImageLayout = ImageLayout.Zoom;
+            exitButton.Parent = winLoseBox;
+            playAgainButton.Parent = winLoseBox;
+            exitButton.Visible = true;
+            playAgainButton.Visible = true;
+
+
+
+        }
+
+        public void GameLose() // screen layout for win game
+        {
+            gameTimer.Enabled = false;
+            winLoseBox.Visible = true;
+            winLoseBox.BackgroundImage = Properties.Resources.loser;
+            winLoseBox.BackgroundImageLayout = ImageLayout.Zoom;
+            exitButton.Parent = winLoseBox;
+            playAgainButton.Parent = winLoseBox;
+            exitButton.Visible = true;
+            playAgainButton.Visible = true;
+
+        }
+
+        //private void GameLose()
+        //{
+        //    winl
+        //}
         private void gameTimer_Tick(object sender, EventArgs e)
         {
 
-            coin1.Image = Properties.Resources.movingCoin;
+            // score label
             score.Text = $"Score: {playerScore}";
 
+            // move character
             character.Top += jumpSpeed;
 
-            // move rectangles
-            for (int i = 0; i < obstacle.Count(); i++)
-            {
-                int y = obstacle[i].Y + obstacleSpeed;
-
-                obstacle[i] = new Rectangle(obstacle[i].X, y, obstacleWidth, obstacleHeight);
-            }
-
-            // add more obstacles
-            obstacleCounter++;
-
-            if (obstacleCounter% 32 == 0)
-            {
-                obstacle.Add(new Rectangle(obstacle[1].X, 0 - this.Height, obstacleWidth, obstacleHeight));
-            }
-            if (jumping && force < 0)
-            {
-                jumping = false;
-            }
-
+            // move character left, and game components in the opposite direction
             if (goLeft)
             {
                 character.Left -= characterSpeed;
                 background.Left += backgroundSpeed;
+                door.Left += backgroundSpeed;
 
                 foreach (Control x in this.Controls)
                 {
@@ -129,11 +171,12 @@ namespace videoGame
                 }
             }
 
+            // move character right, and game components in the opposite direction
             if (goRight)
             {
                 character.Left += characterSpeed;
                 background.Left -= backgroundSpeed;
-
+                door.Left -= backgroundSpeed;
                 foreach (Control x in this.Controls)
                 {
                     if (x is PictureBox && x.Tag == "platform")
@@ -151,6 +194,7 @@ namespace videoGame
                 }
             }
 
+            // make character jump
             if (jumping)
             {
                 jumpSpeed = -12;
@@ -161,7 +205,70 @@ namespace videoGame
                 jumpSpeed = 12;
             }
 
+            // create "gravity" so character goes back down after jumping 
+            if (jumping && force < 0)
+            {
+                jumping = false;
+            }
 
+
+
+            // move obstacles
+            for (int i = 0; i < leftPic.Count(); i++)
+            {
+                int y = leftPic[i].Location.Y + obstacleSpeed;
+                
+                leftPic[i].Location = new Point(leftPic[i].Location.X, y);
+              
+            }
+
+            // add more obstacles
+            obstacleCounter++;
+
+            if (obstacleCounter% 60 == 0)
+            {
+                
+              //  obstacle.Add(new Rectangle(obstacle1X, 0 - this.Height, obstacleWidth, obstacleHeight)); // first obstacle
+                PictureBox newObs = new PictureBox();
+                newObs.Location = new Point(obstacle1X, 0 - this.Height);
+                newObs.Size = new Size(obstacleWidth, obstacleHeight);
+                newObs.BackgroundImage = Properties.Resources.obstaclePic;
+                 newObs.Parent = background;
+                newObs.BringToFront();
+                newObs.Tag = "obstacle";
+                leftPic.Add(newObs);
+
+
+
+                obstacle.Add(new Rectangle(obstacle2X, 0 - this.Height, obstacleWidth, obstacleHeight)); // second obstacle
+                PictureBox newObs2 = new PictureBox();
+                newObs2.Location = new Point(obstacle2X, 0 - this.Height);
+                newObs2.Size = new Size(obstacleWidth, obstacleHeight);
+                newObs2.BackgroundImage = Properties.Resources.obstaclePic;
+                newObs2.Parent = background;
+                leftPic.Add(newObs2);
+
+                obstacle.Add(new Rectangle(obstacle3X, 0 - this.Height, obstacleWidth, obstacleHeight)); // third obstacle
+                PictureBox newObs3 = new PictureBox();
+                newObs3.Location = new Point(obstacle3X, 0 - this.Height);
+                newObs3.Size = new Size(obstacleWidth, obstacleHeight);
+                newObs3.BackgroundImage = Properties.Resources.obstaclePic;
+                newObs3.Parent = background;
+                leftPic.Add(newObs3);
+
+            }
+
+            // remove obstacles offscreen
+            for (int i = 0; i < leftPic.Count(); i++)
+            {
+                if (leftPic[i].Location.Y > this.Height)
+                {
+                    leftPic.RemoveAt(i);
+                }
+            }
+
+
+            // platform collision
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && x.Tag == "platform")
@@ -174,32 +281,81 @@ namespace videoGame
                 }
             }
 
+            // coin collision
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && x.Tag == "coin")
                 {
                     if (character.Bounds.IntersectsWith(x.Bounds))
                     {
+                       
+
                         x.Visible = false;
                         playerScore = playerScore + coinValue;
                         score.Text = $"Score: {playerScore}";
+                        Refresh();
                     }
                 }
             }
-            Refresh();
 
-
-        }
-
-        private void score_Paint(object sender, PaintEventArgs e)
-        {
-            // paint obstacles
-            for (int i = 0; i < obstacle.Count(); i++)
+            // door collision (win)
+            if (character.Bounds.IntersectsWith(door.Bounds))
             {
-                e.Graphics.FillRectangle(obstacleBrush, obstacle[i]);
+
+                GameWin();
+
             }
 
+            // obstacle collision (lose)
+            for (int i = 0; i < leftPic.Count(); i++)
+            {
+                if (character.Bounds.IntersectsWith(leftPic[i].Bounds))
+                {
+                    gameTimer.Enabled = false;
+                }
+            }
+
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && x.Tag == "obstacle")
+                {
+                    if (character.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        gameTimer.Enabled = false;
+                    }
+                }
+            }
+ 
+
+            if (character.Location.Y > this.Height)
+            {
+                GameLose();
+            }
+
+
+           Refresh();
         }
+
+       
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void playAgainButton_Click(object sender, EventArgs e)
+        {
+
+            winLoseBox.Visible = false;
+            GameStart();
+
+            
+            
+          
+
+        }
+
+        
     }
     }
 

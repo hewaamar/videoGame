@@ -92,5 +92,20 @@
   <ItemGroup>
     <None Include="Resources\movingCoin.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nintendo DSi Shop Theme %28High Quality, 2019 Remastered%29.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coinSound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\obstacle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loser.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

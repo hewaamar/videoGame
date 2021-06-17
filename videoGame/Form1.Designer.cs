@@ -33,9 +33,11 @@ namespace videoGame
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.score = new System.Windows.Forms.Label();
-            this.coin4 = new System.Windows.Forms.PictureBox();
-            this.coin3 = new System.Windows.Forms.PictureBox();
-            this.coin2 = new System.Windows.Forms.PictureBox();
+            this.winLoseBox = new System.Windows.Forms.PictureBox();
+            this.door = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.coin1 = new System.Windows.Forms.PictureBox();
             this.platform4 = new System.Windows.Forms.PictureBox();
             this.platform3 = new System.Windows.Forms.PictureBox();
@@ -45,9 +47,13 @@ namespace videoGame
             this.platform1 = new System.Windows.Forms.PictureBox();
             this.platform = new System.Windows.Forms.PictureBox();
             this.background = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.coin4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coin3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coin2)).BeginInit();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.playAgainButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.winLoseBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.door)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.coin1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).BeginInit();
@@ -76,51 +82,71 @@ namespace videoGame
             this.score.Size = new System.Drawing.Size(146, 37);
             this.score.TabIndex = 12;
             this.score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.score.Paint += new System.Windows.Forms.PaintEventHandler(this.score_Paint);
             // 
-            // coin4
+            // winLoseBox
             // 
-            this.coin4.BackColor = System.Drawing.Color.Transparent;
-            this.coin4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coin4.BackgroundImage")));
-            this.coin4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.coin4.Location = new System.Drawing.Point(994, 189);
-            this.coin4.Name = "coin4";
-            this.coin4.Size = new System.Drawing.Size(54, 62);
-            this.coin4.TabIndex = 11;
-            this.coin4.TabStop = false;
-            this.coin4.Tag = "coin";
+            this.winLoseBox.Location = new System.Drawing.Point(-3, -1);
+            this.winLoseBox.Name = "winLoseBox";
+            this.winLoseBox.Size = new System.Drawing.Size(473, 513);
+            this.winLoseBox.TabIndex = 17;
+            this.winLoseBox.TabStop = false;
+            this.winLoseBox.Visible = false;
             // 
-            // coin3
+            // door
             // 
-            this.coin3.BackColor = System.Drawing.Color.Transparent;
-            this.coin3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coin3.BackgroundImage")));
-            this.coin3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.coin3.Location = new System.Drawing.Point(806, 125);
-            this.coin3.Name = "coin3";
-            this.coin3.Size = new System.Drawing.Size(54, 62);
-            this.coin3.TabIndex = 10;
-            this.coin3.TabStop = false;
-            this.coin3.Tag = "coin";
+            this.door.BackColor = System.Drawing.Color.Transparent;
+            this.door.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("door.BackgroundImage")));
+            this.door.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.door.Location = new System.Drawing.Point(1309, 45);
+            this.door.Name = "door";
+            this.door.Size = new System.Drawing.Size(69, 98);
+            this.door.TabIndex = 16;
+            this.door.TabStop = false;
             // 
-            // coin2
+            // pictureBox3
             // 
-            this.coin2.BackColor = System.Drawing.Color.Transparent;
-            this.coin2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coin2.BackgroundImage")));
-            this.coin2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.coin2.Location = new System.Drawing.Point(634, 165);
-            this.coin2.Name = "coin2";
-            this.coin2.Size = new System.Drawing.Size(54, 62);
-            this.coin2.TabIndex = 9;
-            this.coin2.TabStop = false;
-            this.coin2.Tag = "coin";
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.Location = new System.Drawing.Point(1004, 197);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(33, 35);
+            this.pictureBox3.TabIndex = 15;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Tag = "coin";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.Location = new System.Drawing.Point(822, 136);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(33, 35);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "coin";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(649, 181);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 35);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "coin";
             // 
             // coin1
             // 
             this.coin1.BackColor = System.Drawing.Color.Transparent;
+            this.coin1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coin1.BackgroundImage")));
             this.coin1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.coin1.Location = new System.Drawing.Point(385, 125);
+            this.coin1.Location = new System.Drawing.Point(395, 136);
             this.coin1.Name = "coin1";
-            this.coin1.Size = new System.Drawing.Size(54, 62);
+            this.coin1.Size = new System.Drawing.Size(33, 35);
             this.coin1.TabIndex = 8;
             this.coin1.TabStop = false;
             this.coin1.Tag = "coin";
@@ -206,16 +232,48 @@ namespace videoGame
             this.background.TabIndex = 0;
             this.background.TabStop = false;
             // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.LightCoral;
+            this.exitButton.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.exitButton.Location = new System.Drawing.Point(60, 383);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(120, 50);
+            this.exitButton.TabIndex = 18;
+            this.exitButton.Text = "Exit Game";
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Visible = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // playAgainButton
+            // 
+            this.playAgainButton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.playAgainButton.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playAgainButton.ForeColor = System.Drawing.Color.PowderBlue;
+            this.playAgainButton.Location = new System.Drawing.Point(254, 383);
+            this.playAgainButton.Name = "playAgainButton";
+            this.playAgainButton.Size = new System.Drawing.Size(151, 50);
+            this.playAgainButton.TabIndex = 19;
+            this.playAgainButton.Text = "Play Again";
+            this.playAgainButton.UseVisualStyleBackColor = false;
+            this.playAgainButton.Visible = false;
+            this.playAgainButton.Click += new System.EventHandler(this.playAgainButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(509, 504);
+            this.ClientSize = new System.Drawing.Size(1379, 504);
+            this.Controls.Add(this.playAgainButton);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.winLoseBox);
+            this.Controls.Add(this.door);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.score);
-            this.Controls.Add(this.coin4);
-            this.Controls.Add(this.coin3);
-            this.Controls.Add(this.coin2);
             this.Controls.Add(this.coin1);
             this.Controls.Add(this.platform4);
             this.Controls.Add(this.platform3);
@@ -230,9 +288,11 @@ namespace videoGame
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.coin4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coin3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coin2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.winLoseBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.door)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coin1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).EndInit();
@@ -259,10 +319,14 @@ namespace videoGame
         private System.Windows.Forms.PictureBox platform3;
         private System.Windows.Forms.PictureBox platform4;
         private System.Windows.Forms.PictureBox coin1;
-        private System.Windows.Forms.PictureBox coin2;
-        private System.Windows.Forms.PictureBox coin3;
-        private System.Windows.Forms.PictureBox coin4;
         private System.Windows.Forms.Label score;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox door;
+        private System.Windows.Forms.PictureBox winLoseBox;
+        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button playAgainButton;
     }
 }
 
